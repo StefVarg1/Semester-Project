@@ -13,6 +13,6 @@ st.set_page_config(
 
 @st.cache_data
 def load_data():
-    return pd.read_csv('UNO Service Learning Data Sheet De-Identified Version.csv', parse_dates=['date'])
+    return pd.read_csv('UNO Service Learning Data Sheet De-Identified Version.csv')
 
 data = load_data
