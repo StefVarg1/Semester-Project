@@ -5,7 +5,7 @@ from datetime import datetime
 
 # -- CONFIGURATION --
 
-@st.experimental_memo(ttl=3600)
+@st.cahce_data
 def load_data():
     """Load and cache the service data CSV."""
     df = pd.read_csv('UNO Service Learning Data Sheet De-Identified Version.csv', parse_dates=["request_received", "support_sent"])
