@@ -27,21 +27,3 @@ def load_data(nrows):
     data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
     return data
 
-
-def main():
-    st.sidebar.title("Navigation")
-    pages = {
-        "Ready for Review": page_ready_for_review,
-        "Support by Demographics": page_support_by_demographics,
-        "Processing Time": page_processing_time,
-        "Unspent Grants": page_unspent_grants,
-        "Annual Summary": page_summary,
-    }
-    choice = st.sidebar.radio("Go to", list(pages.keys()))
-    df = load_data()
-    pages[choice](df)
-
-if __name__ == "__main__":
-    main()
-
-
