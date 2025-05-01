@@ -9,7 +9,7 @@ from datetime import datetime
 st.title('Hope Foundation Data by Stefan')
 
 DATE_COLUMN = 'Grant Req Date'
-DATA_URL = ('https://github.com/StefVarg1/Semester-Project/raw/refs/heads/main/UNO%20Service%20Learning%20Data%20Sheet%20De-Identified%20Version.csv'
+DATA_URL = ('https://github.com/StefVarg1/Semester-Project/raw/main/UNO%20Service%20Learning%20Data%20Sheet%20De-Identified%20Version.csv'
          'UNO Service Learning Data Sheet De-Identified Version.csv')
 
 def load_data(nrows):
