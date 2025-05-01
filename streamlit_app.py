@@ -8,7 +8,7 @@ import plotly.express as px
 
 # Function to import and clean Excel data from GitHub
 @st.cache_data
-def import_csv_from_github(sheet_name=0):
+def import_excel_from_github(sheet_name=0):
     github_raw_url = "https://github.com/StefVarg1/Semester-Project/raw/refs/heads/main/UNO%20Service%20Learning%20Data%20Sheet%20De-Identified%20Version.csv"
 
     try:
