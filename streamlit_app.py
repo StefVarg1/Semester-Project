@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 from io import BytesIO
-from thefuzz import process
+from fuzzywuzzy import process
 import streamlit as st
 import numpy as np
 import plotly.express as px
