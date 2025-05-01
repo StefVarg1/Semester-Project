@@ -8,14 +8,6 @@ from datetime import datetime
 
 st.title('Hope Foundation Data by Stefan')
 
-@st.cache_data
-def load_data():
-    """Load and cache the service data CSV."""
-    df = pd.read_csv('UNO Service Learning Data Sheet De-Identified Version.csv', parse_dates=["request_received", "support_sent"])
-    # Clean or rename columns here if needed
-    return df
-
-
 DATE_COLUMN = 'Grant Req Date'
 DATA_URL = ('https://github.com/StefVarg1/Semester-Project/blob/main/UNO%20Service%20Learning%20Data%20Sheet%20De-Identified%20Version.csv'
          'UNO Service Learning Data Sheet De-Identified Version.csv')
