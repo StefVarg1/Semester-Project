@@ -28,5 +28,5 @@ def import_and_clean(sheet_name=0) -> pd.DataFrame:
     df = pd.read_excel((url), sheet_name=sheet_name)
     st.write("✅ Data is ready to view!")
 
-    # Clean the data to have the inconsistent values figured out with thefuzz matching closest option
+    # Clean the data to have the inconsistent values figured out with thefuzz matching closest option!
     
