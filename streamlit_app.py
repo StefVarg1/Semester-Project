@@ -76,20 +76,27 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 st.title('Hope Foundation Data by Stefan')
 df = import_and_clean()
 if df is not None:
+    st.subheader("Filter Data")
+    columns = df.columns.tolist()
+    selected_column = st.selectbox("Select column to filter by", columns)
+    unique_values = df[selected_column].unique()
+    selected_value = st.selectbox("Select value", unique_values)
+
+    filtered_df = df[df[selected_column] == selected_value]
+    st.write(filtered_df)
+
+    st.subheader("Plot Data")
+    x_column = st.selectbox("Select x-axis column", columns)
+    y_column = st.selectbox("Select y-axis column", columns)
+
+    if st.button("Generate Plot"):
+        st.line_chart(filtered_df.set_index(x_column)[y_column])
+    else:
+        st.write("Data Failed")
     st.subheader("Clean Data Preview (I hope)")
     st.write(df.columns)
     st.dataframe(df.head(), use_container_width = True)
 
-    @st.cache_data
-    def to_csv(data: pd.DataFrame) -> bytes:
-        return data.to_csv(index=False).encode('utf-8')
 
-    csv = to_csv(df)
-    st.download_button(
-        label="Download",
-        data=csv,
-        file_name='Hopefully New Data',
-        mime='text/csv',
-        icon=":material/download:")
 
 
