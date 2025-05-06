@@ -69,8 +69,7 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
     if 'Grant Req Date' in df.columns:
         df['Grant Req Date'] = pd.to_datetime(df['Grant Req Date'], errors='coerce')
         df['Year'] = df['Grant Req Date'].dt.year
-    
-    return df
+
 
 # Website functions and layout
 st.title('Hope Foundation Data by Stefan')
