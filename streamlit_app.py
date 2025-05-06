@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_option_menu import option_menu
 import pandas as pd
 import numpy as np
 from thefuzz import process
@@ -58,7 +59,7 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
         df['Race'] = fuzzy_map(df['Race'], ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Middle Eastern or North African', 'Native Hawaiian or Pacific Islander', 'White', 'Decline to Answer', 'Other', 'Two or More'], lower=False)
 
     if 'Insurance Type' in df.columns:
-        df['Insurance Type'] = fuzzy_map(df['Insurance Type'], ['Medicare', 'Medicaid', 'Medicare & Medicaid', 'Medicare & Private', 'Medicare & Other', 'Military' 'Uninsured', 'Private'])
+        df['Insurance Type'] = fuzzy_map(df['Insurance Type'], ['Medicare', 'Medicaid', 'Medicare & Medicaid', 'Medicare & Private', 'Medicare & Other', 'Military', 'Uninsured', 'Private'])
 
     if 'Type of Assistance (CLASS)' in df:
         assistance_type = ['Car Payment', 'Housing', 'Medical Supplies/Prescription Co-pay(s)', 'Phone/Internet', 'Food/Groceries', 'Gas', 'Other', 'Hotel',  'Utilities', 'Multiple']
@@ -75,22 +76,21 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 # Website functions and layout
 st.title('Hope Foundation Data by Stefan')
 df = import_and_clean()
-if df is not None:
-    st.subheader("Filter Data")
-    columns = df.columns.tolist()
-    selected_column = st.selectbox("Select column to filter by", columns)
-    unique_values = df[selected_column].unique()
-    selected_value = st.selectbox("Select value", unique_values)
 
-    filtered_df = df[df[selected_column] == selected_value]
-    st.write(filtered_df)
+with st.sidebar:
+    selected = option_menu("Main Menu", ["Home", "How Much and Who?", "Response Time"], 
+        icons=['house', 'archive-fill', 'archive-fill'], menu_icon='📜', default_index=1)
 
-    st.subheader("Plot Data")
-    x_column = st.selectbox("Select x-axis column", columns)
-    y_column = st.selectbox("Select y-axis column", columns)
-
-    if st.button("Generate Plot"):
-        st.bar_chart(filtered_df.set_index(x_column)[y_column])
+    if selected == "How Much and Who?":
+        if df is not None:
+            st.subheader("Filter Data")
+            columns = df.columns.tolist()
+            selected_column = st.selectbox("Select column to filter by", columns)
+            unique_values = df[selected_column].unique()
+            selected_value = st.selectbox("Select value", unique_values)
+            filtered_df = df[df[selected_column] == selected_value]
+            st.write(filtered_df)
+    selected
 
 
 
