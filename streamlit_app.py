@@ -90,7 +90,7 @@ if df is not None:
     y_column = st.selectbox("Select y-axis column", columns)
 
     if st.button("Generate Plot"):
-        st.hist_chart(filtered_df.set_index(x_column)[y_column])
+        st.box_chart(filtered_df.set_index(x_column)[y_column])
 
 
 
