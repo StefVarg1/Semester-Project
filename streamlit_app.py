@@ -75,5 +75,11 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
     
     return df
 
+# Website functions and layout
+df = import_and_clean()
 
+if df is not None:
+    st.subheader("Clean Data Preview (I hope)")
+    st.write(df.columns)
+    st.dataframe(df.head(), use_container_width = True)
 
