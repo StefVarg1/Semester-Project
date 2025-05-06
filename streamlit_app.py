@@ -84,5 +84,12 @@ if df is not None:
     def to_csv(data: pd.DataFrame) -> bytes:
         return data.to_csv(index=False).encode('utf-8')
 
+    csv = to_csv(df)
+    st.download_button(
+        label="Download Cleaned Data",
+        data=csv,
+        file_name='Hopefully New Data',
+        mime='text/csv',
+        icon=":material/download:")
 
 
