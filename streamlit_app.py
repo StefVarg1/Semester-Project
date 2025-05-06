@@ -17,7 +17,7 @@ def fuzzy_map(series: pd.Series, options: list[str], default=np.nan, lower: bool
     """
     opts = [opt.lower() if lower else opt for opt in options]
     def _match(excel_value):
-        if pd.isa(excel_value):
+        if pd.isna(excel_value):
             return default
         text = excel_value.lower() if lower else str(excel_value)
         match, score = process.extractOne(text, opts)
