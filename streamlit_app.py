@@ -5,9 +5,6 @@ from thefuzz import process
 import matplotlib.pyplot as plt
 import datetime as dt
 
-# Header 
-st.title('Hope Foundation Data by Stefan')
-
 # Functions to help with figuring out the inconsistent data
 
 def fuzzy_map(series: pd.Series, options: list[str], default=np.nan, lower: bool = True) -> pd.Series:
@@ -39,7 +36,7 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
         df['Request Status'] = fuzzy_map(df['Request Status'], ['pending', 'approved', 'denied', 'completed'])
 
     if 'Application Signed?' in df.columns:
-        df['Application Signed?'] = fuzzy_map(df['Application Status?'],['n/a', 'no', 'yes'], default='n/a')
+        df['Application Signed?'] = fuzzy_map(df['Application Signed?'],['n/a', 'no', 'yes'], default='n/a')
     
     # States are so bad in this column, why are so many missing?
     patient_state = {"Nebraska": "NE", "Florida": "FL", "Iowa": "IA", "Kansas": "KS", "Missouri": "MO", "South Dakota": "SD", "Wyoming": "WY", "Colorado": "CO", "Minnesota": "MN"}
@@ -76,6 +73,8 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
     return df
 
 # Website functions and layout
+st.title('Hope Foundation Data by Stefan')
+
 df = import_and_clean()
 
 if df is not None:
