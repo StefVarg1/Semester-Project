@@ -30,11 +30,11 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
     url = ("https://github.com/StefVarg1/Semester-Project/raw/refs/heads/main/UNO%20Service%20Learning%20Data%20Sheet%20De-Identified%20Version.xlsx")
     df = pd.read_excel((url), sheet_name=sheet_name)
     st.write("✅ Data is ready to view!")
+    st.subheader("Data Preview")
+    st.write(df.head())
 
 # Streamlit Webpage setup
-    if df is not None:
-        st.subheader("Hope Foundation Data Preview")
-        st.write(df.head())
+
 
 # Clean the data to have the inconsistent values figured out with thefuzz matching closest option!
-    
+
