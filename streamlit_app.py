@@ -27,7 +27,7 @@ def fuzzy_map(series: pd.Series, options: list[str], default=np.nan, lower: bool
 def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
     url = ("https://github.com/StefVarg1/Semester-Project/raw/refs/heads/main/UNO%20Service%20Learning%20Data%20Sheet%20De-Identified%20Version.xlsx")
     df = pd.read_excel((url), sheet_name=sheet_name)
-    st.write("✅ Data is ready to view!")
+    st.write("✅Ready for Review!")
 
 # Clean the data to have the inconsistent values figured out with thefuzz matching closest option!
 # Make values for categories consistent with useful actual values
@@ -76,10 +76,10 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 st.title('Hope Foundation Data by Stefan')
 df = import_and_clean()
 
-selected = st.sidebar.selectbox("Pages", ["Ready for Review", "Payment Based on Demographics", "Request to Response Time", "Grant Amounts by Categories"])
+selected = st.sidebar.selectbox("Pages", ["Filter Table", "Payment Based on Demographics", "Request to Response Time", "Grant Amounts by Categories"])
 
-if selected == "Ready for Review":
-    st.subheader("Ready for Review")
+if selected == "Filter Table":
+    st.subheader("Filter Table")
     columns = df.columns.tolist()
     selected_column = st.selectbox("Select column to filter by", columns)
     unique_values = df[selected_column].unique()
