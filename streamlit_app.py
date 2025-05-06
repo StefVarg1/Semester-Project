@@ -79,8 +79,9 @@ df = import_and_clean()
 
 with st.sidebar:
     selected = option_menu("Main Menu", ["Home", "How Much and Who?", "Response Time"], 
-        icons=['house', 'archive-fill', 'archive-fill'], menu_icon='📜', default_index=1)
-
+        icons=['house', 'archive-fill', 'archive-fill'], menu_icon="cast", default_index=1)
+    selected
+    
 if selected == "How Much and Who?":
     st.subheader("Filter Data")
     columns = df.columns.tolist()
