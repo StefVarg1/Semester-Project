@@ -34,10 +34,10 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 # Make values for categories consistent with useful actual values
 
     if 'Request Status' in df.columns:
-        df['Request Status'] = fuzzy_map(df['Request Status'], ['pending', 'approved', 'denied', 'completed'])
+        df['Request Status'] = fuzzy_map(df['Request Status'], ['Pending', 'Approved', 'Denied', 'Completed'])
 
     if 'Application Signed?' in df.columns:
-        df['Application Signed?'] = fuzzy_map(df['Application Signed?'],['n/a', 'no', 'yes'], default='N/A')
+        df['Application Signed?'] = fuzzy_map(df['Application Signed?'],['N/A', 'NO', 'YES'], default='Unknown')
     
     # States are so bad in this column, why are so many missing?
     pt_state = {"Nebraska": "NE", "Florida": "FL", "Iowa": "IA", "Kansas": "KS", "Missouri": "MO", "South Dakota": "SD", "Wyoming": "WY", "Colorado": "CO", "Minnesota": "MN"}
@@ -81,15 +81,8 @@ with st.sidebar:
     selected = option_menu("Main Menu", ["Home", "How Much and Who?", "Response Time"], 
         icons=['house', 'archive-fill', 'archive-fill'], menu_icon="cast", default_index=1)
     selected
-    
-if selected == "How Much and Who?":
-    st.subheader("Filter Data")
-    columns = df.columns.tolist()
-    selected_column = st.selectbox("Select column to filter by", columns)
-    unique_values = df[selected_column].unique()
-    selected_value = st.selectbox("Select value", unique_values)
-    filtered_df = df[df[selected_column] == selected_value]
-    st.write(filtered_df)
+
+
 
 
 
