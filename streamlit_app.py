@@ -36,16 +36,16 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
         df['Request Status'] = fuzzy_map(df['Request Status'], ['pending', 'approved', 'denied', 'completed'])
 
     if 'Application Signed?' in df.columns:
-        df['Application Signed?'] = fuzzy_map(df['Application Signed?'],['n/a', 'no', 'yes'], default='n/a')
+        df['Application Signed?'] = fuzzy_map(df['Application Signed?'],['n/a', 'no', 'yes'], default='N/A')
     
     # States are so bad in this column, why are so many missing?
-    patient_state = {"Nebraska": "NE", "Florida": "FL", "Iowa": "IA", "Kansas": "KS", "Missouri": "MO", "South Dakota": "SD", "Wyoming": "WY", "Colorado": "CO", "Minnesota": "MN"}
+    pt_state = {"Nebraska": "NE", "Florida": "FL", "Iowa": "IA", "Kansas": "KS", "Missouri": "MO", "South Dakota": "SD", "Wyoming": "WY", "Colorado": "CO", "Minnesota": "MN"}
     if 'Pt State' in df.columns:
-        def map_state(AA):
-            if pd.isna(AA) or AA.lower().strip() == 'nan':
-                return AA
-            match = process.extractOne(AA, list(patient_state))
-            return patient_state.get(match[0], AA) if match else AA
+        def map_state(x):
+            if pd.isna(x) or x.lower().strip() == 'nan':
+                return x
+            match = process.extractOne(x, list(pt_state))
+            return pt_state.get(match[0], x) if match else x
         df['Pt State'] = df['Pt State'].astype(str).apply(map_state)
 
     if 'Marital Status' in df.columns:
@@ -74,9 +74,7 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 
 # Website functions and layout
 st.title('Hope Foundation Data by Stefan')
-
 df = import_and_clean()
-
 if df is not None:
     st.subheader("Clean Data Preview (I hope)")
     st.write(df.columns)
