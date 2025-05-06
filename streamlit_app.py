@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
 import pandas as pd
 import numpy as np
 from thefuzz import process
@@ -77,10 +76,17 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 st.title('Hope Foundation Data by Stefan')
 df = import_and_clean()
 
-with st.sidebar:
-    selected = option_menu("Main Menu", ["Home", "How Much and Who?", "Response Time"], 
-        icons=['house', 'archive-fill', 'archive-fill'], menu_icon="cast", default_index=1)
-    selected
+selected = st.sidebar.selectbox("Pages", ["Ready for Review", "Payment Based on Demographics", "Request to Response Time", "Grant Amounts by Categories"])
+
+if selected == "Ready for Review":
+    st.subheader("Ready for Review")
+    columns = df.columns.tolist()
+    selected_column = st.selectbox("Select column to filter by", columns)
+    unique_values = df[selected_column].unique()
+    selected_value = st.selectbox("Select value", unique_values)
+    filtered_df = df[df[selected_column] == selected_value]
+    st.write(filtered_df)
+
 
 
 
