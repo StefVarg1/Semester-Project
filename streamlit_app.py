@@ -81,16 +81,15 @@ with st.sidebar:
     selected = option_menu("Main Menu", ["Home", "How Much and Who?", "Response Time"], 
         icons=['house', 'archive-fill', 'archive-fill'], menu_icon='📜', default_index=1)
 
-    if selected == "How Much and Who?":
-        if df is not None:
-            st.subheader("Filter Data")
-            columns = df.columns.tolist()
-            selected_column = st.selectbox("Select column to filter by", columns)
-            unique_values = df[selected_column].unique()
-            selected_value = st.selectbox("Select value", unique_values)
-            filtered_df = df[df[selected_column] == selected_value]
-            st.write(filtered_df)
-    selected
+if selected == "How Much and Who?":
+    st.subheader("Filter Data")
+    columns = df.columns.tolist()
+    selected_column = st.selectbox("Select column to filter by", columns)
+    unique_values = df[selected_column].unique()
+    selected_value = st.selectbox("Select value", unique_values)
+    filtered_df = df[df[selected_column] == selected_value]
+    st.write(filtered_df)
+
 
 
 
