@@ -18,7 +18,7 @@ def fuzzy_map(series: pd.Series, options: list[str], default=np.nan, lower: bool
             return default
         text = excel_value.lower() if lower else str(excel_value)
         match, score = process.extractOne(text, opts)
-        return match if score >= 55 else default
+        return match if score >= 70 else default
     return series.astype(str).apply(_match)
 
 
@@ -69,7 +69,8 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
     if 'Grant Req Date' in df.columns:
         df['Grant Req Date'] = pd.to_datetime(df['Grant Req Date'], errors='coerce')
         df['Year'] = df['Grant Req Date'].dt.year
-
+    
+    return df
 
 # Website functions and layout
 st.title('Hope Foundation Data by Stefan')
@@ -77,5 +78,7 @@ df = import_and_clean()
 if df is not None:
     st.subheader("Clean Data Preview (I hope)")
     st.write(df.columns)
-    st.dataframe(df.head(), use_container_width = True)
+    st.dataframe(df.head(), use_container_width = True, use_container_height = True)
+
+
 
