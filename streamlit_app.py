@@ -78,7 +78,11 @@ df = import_and_clean()
 if df is not None:
     st.subheader("Clean Data Preview (I hope)")
     st.write(df.columns)
-    st.dataframe(df.head(), use_container_width = True, use_container_height = True)
+    st.dataframe(df.head(), use_container_width = True)
+
+    @st.cache_data
+    def to_csv(data: pd.DataFrame) -> bytes:
+        return data.to_csv(index=False).encode('utf-8')
 
 
 
