@@ -86,7 +86,7 @@ if df is not None:
 
     csv = to_csv(df)
     st.download_button(
-        label="Download Cleaned Data",
+        label="Download",
         data=csv,
         file_name='Hopefully New Data',
         mime='text/csv',
