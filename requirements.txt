@@ -6,3 +6,5 @@ numpy
 plotly
 plotly.express
 thefuzz
+process
+
