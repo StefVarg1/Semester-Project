@@ -90,12 +90,9 @@ if df is not None:
     y_column = st.selectbox("Select y-axis column", columns)
 
     if st.button("Generate Plot"):
-        st.line_chart(filtered_df.set_index(x_column)[y_column])
-    else:
-        st.write("Data Failed")
-    st.subheader("Clean Data Preview (I hope)")
-    st.write(df.columns)
-    st.dataframe(df.head(), use_container_width = True)
+        st.hist(filtered_df.set_index(x_column)[y_column])
+
+
 
 
 
