@@ -4,6 +4,9 @@ import numpy as np
 from thefuzz import process
 import matplotlib.pyplot as plt
 
+# Header 
+st.title('Hope Foundation Data by Stefan')
+
 # Functions to help with figuring out the inconsistent data
 
 def fuzzy_map(series: pd.Series, options: list[str], default=np.nan, lower: bool = True) -> pd.Series:
@@ -29,9 +32,9 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
     st.write("✅ Data is ready to view!")
 
 # Streamlit Webpage setup
-    st.title('Hope Foundation Data by Stefan')
-    st.subheader("Hope Foundation Data Preview")
-    st.write(df.head())
+    if df is not None:
+        st.subheader("Hope Foundation Data Preview")
+        st.write(df.head())
 
 # Clean the data to have the inconsistent values figured out with thefuzz matching closest option!
     
