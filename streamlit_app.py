@@ -76,7 +76,7 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 st.title('Hope Foundation Data by Stefan')
 df = import_and_clean()
 
-selected = st.topbar.selectbox("Pages", ["Ready for Review", "Payment Based on Demographics", "Request to Response Time", "Grant Amounts by Categories"])
+selected = st.sidebar.selectbox("Pages", ["Ready for Review", "Payment Based on Demographics", "Request to Response Time", "Grant Amounts by Categories"])
 
 if selected == "Ready for Review":
     st.subheader("Ready for Review")
