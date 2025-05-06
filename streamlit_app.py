@@ -65,9 +65,9 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
         df['Type of Assistance (CLASS)'] = fuzzy_map(df['Type of Assistance (CLASS)'], assistance_type, lower=False)
 
     if 'Payment Submitted?' in df.columns:
-        df['Payment Submitted?'] = pd.to_dt(df['Payment Submitted?'], errors='coerce')
+        df['Payment Submitted?'] = pd.to_datetime(df['Payment Submitted?'], errors='coerce')
     if 'Grant Req Date' in df.columns:
-        df['Grant Req Date'] = pd.to_dt(df['Grant Req Date'], errors='coerce')
+        df['Grant Req Date'] = pd.to_datetime(df['Grant Req Date'], errors='coerce')
         df['Year'] = df['Grant Req Date'].dt.year
     
     return df
