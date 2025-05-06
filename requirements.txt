@@ -4,5 +4,4 @@ numpy
 requests
 plotly
 thefuzz
-matplotlib.pyplot
-
+matplotlib
