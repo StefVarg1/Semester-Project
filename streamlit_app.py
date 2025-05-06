@@ -37,4 +37,10 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 
 
 # Clean the data to have the inconsistent values figured out with thefuzz matching closest option!
+    df.replace(to_replace=r'(?i)^missing$', value=np.nan, regex=True, inplace=True)
+    df.rename(columns={
+        'State': 'Pt State',
+        'Payment Submitted': 'Payment Submitted?',
+        'Application Signed': 'Application Signed?'
+    }, inplace=True)
 
