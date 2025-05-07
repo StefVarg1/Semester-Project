@@ -110,5 +110,6 @@ if selected == "Filter Table":
     st.write(filtered_df)
 
 else:
+    selected == "Payment Based on Demographics"
     st.subheader(selected)
 
