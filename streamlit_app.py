@@ -67,6 +67,7 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
 
     if 'Payment Submitted?' in df.columns:
         df['Payment Submitted?'] = pd.to_datetime(df['Payment Submitted?'], errors='coerce')
+
     if 'Grant Req Date' in df.columns:
         df['Grant Req Date'] = pd.to_datetime(df['Grant Req Date'], errors='coerce')
         df['Year'] = df['Grant Req Date'].dt.year
@@ -110,13 +111,4 @@ if selected == "Filter Table":
 
 else:
     st.subheader(selected)
-    # select_year = st.selectbox("Year", sorted(df.columns['Year'].dropna().unique()) key = "Demo_Year")
-
-
-
-
-
-
-
-
-
+    select_year = st.selectbox("Year", sorted(df.columns['Year'].dropna().unique())(key = "Demo_Year"))
