@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from thefuzz import process
 import matplotlib.pyplot as plt
+import plotly.express as px
 import datetime as dt
 
 # Functions to help with figuring out the inconsistent data
@@ -99,7 +100,7 @@ df = import_and_clean()
 selected = st.sidebar.selectbox("Pages", ["Filter Table", "Payment Based on Demographics", "Request to Response Time", "Grant Amounts by Categories"])
 
 if selected == "Filter Table":
-    st.subheader("Filter Table")
+    st.subheader(selected)
     columns = df.columns.tolist()
     selected_column = st.selectbox("Select column to filter by", columns)
     unique_values = df[selected_column].unique()
@@ -107,6 +108,9 @@ if selected == "Filter Table":
     filtered_df = df[df[selected_column] == selected_value]
     st.write(filtered_df)
 
+else:
+    st.subheader(selected)
+    select_year = st.selectbox("Year", sorted(df.columns['Year'].dropna().unique()) key = "Demo_Year")
 
 
 
