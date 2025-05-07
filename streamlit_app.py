@@ -101,7 +101,7 @@ df = import_and_clean()
 selected = st.sidebar.selectbox("Pages", ["Filter Table", "Payment Based on Demographics", "Request to Response Time", "Grant Amounts by Categories"])
 
 if selected == "Filter Table":
-    st.subheader(selected)
+    st.subheader("Filter Table")
     columns = df.columns.tolist()
     selected_column = st.selectbox("Select column to filter by", columns)
     unique_values = df[selected_column].unique()
@@ -111,5 +111,5 @@ if selected == "Filter Table":
 
 else:
     selected == "Payment Based on Demographics"
-    st.subheader(selected)
+    st.subheader("Payment Based on Demographics")
 
