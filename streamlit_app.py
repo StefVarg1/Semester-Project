@@ -70,6 +70,26 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
         df['Grant Req Date'] = pd.to_datetime(df['Grant Req Date'], errors='coerce')
         df['Year'] = df['Grant Req Date'].dt.year
     
+    if 'Total Household Gross Monthly Income' in df:
+        df['Total Household Gross Monthly Income'] = pd.to_numeric(df['Total Household Gross Monthly Income'], errors='coerce')
+        df['Total Household Gross Annual Income'] = ['Total Household Gross Monthly Income'] * 12
+        def income_level(x):
+            if pd.isna(x):
+                return pd.NA
+            if x <= 15650:
+                return "Below Poverty Threshold"
+            if 15650 < x <= 19562.5:
+                return "Between Thershold & 125% Multiple"
+            if 19562.5 < x <= 23475:
+                return "Between 125% & 150% Multiple"
+            if 23475 < x <= 28925.5:
+                return "Between 150% & 185% Multiple"
+            if 28925.5 < x <= 70000:
+                return "Between 185% Multiple and Median Household Income"
+            if 70000 < x:
+                return "Above Median"
+            df['Household Gross Annual Income Level'] = df['Total Household Gross Annual Income'].apply(income_level)
+            
     return df
 
 # Website functions and layout
