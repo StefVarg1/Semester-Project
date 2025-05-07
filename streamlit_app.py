@@ -105,7 +105,6 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
         if 28925.5 < x <= 70000:
             return "Between 185% & Median Income"
         return "Above Median"
-
     df['Household Gross Annual Income Level'] = df['Total Household Gross Annual Income'].apply(income_level)
     
     return df
