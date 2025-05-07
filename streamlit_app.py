@@ -111,4 +111,4 @@ if selected == "Filter Table":
 
 else:
     st.subheader(selected)
-    select_year = st.selectbox("Year", sorted(df.columns['Year'].dropna().unique())(key = "Demo_Year"))
+
