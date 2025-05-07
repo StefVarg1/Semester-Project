@@ -26,8 +26,8 @@ def fuzzy_map(series: pd.Series, options: list[str], default=np.nan, lower: bool
 # Load the data into the dataframe and pray it works
 @st.cache_data
 def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
-    url = ("https://github.com/StefVarg1/Semester-Project/raw/refs/heads/main/UNO%20Service%20Learning%20Data%20Sheet%20De-Identified%20Version.xlsx")
-    df = pd.read_excel((url), sheet_name=sheet_name)
+    File_Path = ("https://github.com/StefVarg1/Semester-Project/raw/refs/heads/main/UNO%20Service%20Learning%20Data%20Sheet%20De-Identified%20Version.xlsx")
+    df = pd.read_excel((File_Path), sheet_name=sheet_name)
     st.write("✅Ready for Review!")
 
 # Clean the data to have the inconsistent values figured out with thefuzz matching closest option!
@@ -71,6 +71,14 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
     if 'Insurance Type' in df.columns:
         df['Insurance Type'] = fuzzy_map(df['Insurance Type'], ['Medicare', 'Medicaid', 'Medicare & Medicaid', 'Medicare & Private', 'Medicare & Other', 'Military', 'Uninsured', 'Private'])
 
+    if 'Household Size' in df.columns:
+        df['Household Size'] = pd.to_numeric(df['Household Size'], errors='coerce')
+    def unlikely_size(x):
+        if (x > 12) | (x == "0"):
+            return pd.NA
+        else:
+            return x
+
     if 'Type of Assistance (CLASS)' in df:
         assistance_type = ['Car Payment', 'Housing', 'Medical Supplies/Prescription Co-pay(s)', 'Phone/Internet', 'Food/Groceries', 'Gas', 'Other', 'Hotel',  'Utilities', 'Multiple']
         df['Type of Assistance (CLASS)'] = fuzzy_map(df['Type of Assistance (CLASS)'], assistance_type, lower=False)
@@ -106,7 +114,7 @@ def import_and_clean(sheet_name: int=0) -> pd.DataFrame:
             return "Between 185% & Median Income"
         return "Above Median"
     df['Household Gross Annual Income Level'] = df['Total Household Gross Annual Income'].apply(income_level)
-    
+
     return df
 
 # Website functions and layout
