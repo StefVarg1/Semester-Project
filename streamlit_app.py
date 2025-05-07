@@ -109,6 +109,4 @@ if selected == "Filter Table":
     filtered_df = df[df[selected_column] == selected_value]
     st.write(filtered_df)
 
-elif selected == "Payment Based on Demographics":
-    st.subheader("Payment Based on Demographics")
 
