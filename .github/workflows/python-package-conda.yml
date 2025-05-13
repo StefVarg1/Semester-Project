@@ -26,9 +26,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Run updatde app
-      - name: Run update Script
-        run: python streamlit_app_update.py
+      # Run app since cleaning occurs in same file
+      - name: Run Script
+        run: python streamlit_app.py
 
       # Commit and Push Updated Data
       - name: Commit and Push Changes streamlit_app.py
